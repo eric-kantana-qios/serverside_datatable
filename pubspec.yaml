@@ -1,6 +1,6 @@
 name: serverside_datatable
 description: Simplified generic serverside datatable by only providing the fetch implementation.
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/eric-kantana-qios/serverside_datatable.git
 
 environment:
