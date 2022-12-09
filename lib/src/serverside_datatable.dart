@@ -62,13 +62,14 @@ class _ServerSideDataTableState<T> extends State<ServerSideDataTable<T>> {
         ],
       ),
       actions: [
-        ServerSideFilterMenu(
-          filters: widget._filters,
-          onFilterApplied: (filterApplied) {
-            _source.addFilter(filterApplied);
-          },
-          columnFilterRow: widget._columnFilterRow,
-        ),
+        if (widget._filters.isNotEmpty)
+          ServerSideFilterMenu(
+            filters: widget._filters,
+            onFilterApplied: (filterApplied) {
+              _source.addFilter(filterApplied);
+            },
+            columnFilterRow: widget._columnFilterRow,
+          ),
       ],
       source: _source,
       rowsPerPage: _source.rowsPerPage,

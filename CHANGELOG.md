@@ -5,3 +5,11 @@
 ## 0.0.2
 
 Add customizable filter functionality, refactor code structure for import statement, and add filter & lastFetchedItem params to repositorie's fetchData
+
+## 0.0.3
+
+Add clickable row
+
+## 0.0.4
+
+Fix issue on empty filters
