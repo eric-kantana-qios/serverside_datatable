@@ -31,7 +31,7 @@ class _ServerSideFilterChipsState<T> extends State<ServerSideFilterChips<T>> {
                   onDeleted: () {
                     source.removeFilter(filter);
                   },
-                  label: Text("${filter.field} ${filter.matchMode.string} ${filter.value}"),
+                  label: Text("${filter.field} ${filter.matchMode.string} ${filter.value ?? filter.dropDownValue?.dropdownName}"),
                 ),
               ),
             ),

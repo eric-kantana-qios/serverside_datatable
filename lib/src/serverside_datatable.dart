@@ -48,6 +48,7 @@ class _ServerSideDataTableState<T> extends State<ServerSideDataTable<T>> {
   @override
   Widget build(BuildContext context) {
     return PaginatedDataTable(
+      showCheckboxColumn: false,
       header: Row(
         children: [
           Text(widget._label),

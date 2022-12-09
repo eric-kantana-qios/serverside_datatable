@@ -13,3 +13,19 @@ Add clickable row
 ## 0.0.4
 
 Fix issue on empty filters
+
+## 0.0.5
+
+Disable checkbox button
+
+## 0.0.6
+
+Fix issue on zero division
+
+## 0.0.7
+
+Fix issue on zero division
+
+## 0.0.8
+
+Adjust filter layout

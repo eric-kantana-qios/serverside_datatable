@@ -7,7 +7,7 @@ class ServerSideToggleButtons<T> extends StatefulWidget {
   final Function(T selectedItem)? _onItemSelected;
   final int _rowCount;
   final T? _defaultSelected;
-  const ServerSideToggleButtons({
+  ServerSideToggleButtons({
     Key? key,
     required List<T> items,
     Function(T selectedItem)? onItemSelected,
@@ -17,6 +17,7 @@ class ServerSideToggleButtons<T> extends StatefulWidget {
         _onItemSelected = onItemSelected,
         _rowCount = rowCount > items.length ? items.length : rowCount,
         _defaultSelected = defaultSelected,
+        assert(items.isNotEmpty, "Toogle button item cannot be empty"),
         super(key: key);
 
   @override
@@ -30,6 +31,15 @@ class _ServerSideToggleButtonsState<T> extends State<ServerSideToggleButtons<T>>
   @override
   void initState() {
     super.initState();
+    _selections = {
+      for (var item in widget._items) item: widget._defaultSelected != null && widget._defaultSelected == item,
+    };
+    columnCount = (_selections.length / widget._rowCount).ceil();
+  }
+
+  @override
+  void didUpdateWidget(covariant ServerSideToggleButtons<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
     _selections = {
       for (var item in widget._items) item: widget._defaultSelected != null && widget._defaultSelected == item,
     };

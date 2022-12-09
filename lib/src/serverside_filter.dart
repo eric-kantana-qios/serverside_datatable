@@ -11,7 +11,15 @@ class ServerSideFilter<T extends DropdownItem> {
     required this.matchModes,
     required this.filterType,
     List<T> items = const [],
-  }) : dropdownItems = items;
+  })  : dropdownItems = items,
+        assert(matchModes.isNotEmpty, "Filter should be at least contain one match mode"),
+        assert(!(filterType == ServerSideFilterType.dropdown && items.isEmpty),
+            "Dropdown item should be at least contains 1 item if filter type is dropdown");
+
+  @override
+  String toString() {
+    return field;
+  }
 }
 
 enum ServerSideFilterType { textField, dropdown, datetimePicker }
