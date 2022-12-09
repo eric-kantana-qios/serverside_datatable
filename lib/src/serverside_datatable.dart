@@ -14,6 +14,7 @@ class ServerSideDataTable<T> extends StatefulWidget {
   final String _label;
   final int _columnFilterRow;
   final ServerSideRepository<T> _repository;
+  final void Function(T rowData)? onRowClick;
 
   const ServerSideDataTable({
     Key? key,
@@ -22,6 +23,7 @@ class ServerSideDataTable<T> extends StatefulWidget {
     List<ServerSideFilter> filters = const [],
     required ServerSideRepository<T> repository,
     int columnFilterRow = 1,
+    Function(T rowData)? this.onRowClick,
   })  : _label = label,
         _columns = columns,
         _repository = repository,
@@ -40,7 +42,7 @@ class _ServerSideDataTableState<T> extends State<ServerSideDataTable<T>> {
   void initState() {
     super.initState();
 
-    _source = ServerSideDataSource<T>(widget._repository, widget._columns, 0, 10);
+    _source = ServerSideDataSource<T>(widget._repository, widget._columns, 0, 10, widget.onRowClick);
   }
 
   @override

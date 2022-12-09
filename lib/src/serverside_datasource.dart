@@ -10,6 +10,7 @@ class ServerSideDataSource<T> extends DataTableSource {
   int _rowsPerPage;
   final List<ServerSideAppliedFilter> _filters = [];
   final ServerSideRepository<T> _repository;
+  final Function(T rowData)? onRowClick;
 
   void onRepositoryParamUpdated() {
     _fetch();
@@ -46,7 +47,7 @@ class ServerSideDataSource<T> extends DataTableSource {
   final List<T> _data = [];
   int _totalRecords = 0;
 
-  ServerSideDataSource(this._repository, this._columns, this._offset, this._rowsPerPage) {
+  ServerSideDataSource(this._repository, this._columns, this._offset, this._rowsPerPage, this.onRowClick) {
     _repository.addListener(onRepositoryParamUpdated);
     _fetch();
   }
@@ -73,6 +74,9 @@ class ServerSideDataSource<T> extends DataTableSource {
     final rowIndex = index % _rowsPerPage;
     if (rowIndex > _data.length - 1) return null;
     return DataRow(
+      onSelectChanged: (value) {
+        onRowClick?.call(_data[rowIndex]);
+      },
       color: MaterialStateProperty.resolveWith<Color?>((states) {
         // if (states.contains(MaterialState.selected)) return Colors.red.withOpacity(0.08);
         return null;
