@@ -11,29 +11,60 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+Serverside Datatable that handle the pagination for you. All you need to do is implement the ServersideRepository class
+which define your fetch implementation.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- Pagination
+- Filter is not supported yet.
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+1. Create a class that extends ServersideRepository.
+2. Create PODO (Plain Old Dart Object) class.
 
 ```dart
-const like = 'sample';
+class FooBar {
+    double foo;
+    double bar;
+
+    FooBar(this.foo, this.bar);
+}
+
+class FooBarRepository extends ServerSideRepository<FooBar> {
+
+    @override
+    Future<ServerSideResponse<FooBar>> fetchData(int offset, int limit) async {
+        final fooBars = [
+            FooBar(5, 5),
+            FooBar(1, 3),
+            FooBar(2, 4),
+            FooBar(8, 9),
+        ];
+        final totalRecords = fooBars.length;
+        if (offset + limit > totalRecords) limit = totalRecords;
+        return ServerSideResponse(fooBars.getRange(offset, limit), totalRecords);
+    }
+}
+
+ServerSideDataTable<FooBar>(
+    repository: FooBarRepository(),
+    columns: [
+        ServerSideColumn(
+            header: "Foo",
+            field: "foo",
+            renderer: (FooBar rowData) => Text(rowData.foo),
+        ),
+        ServerSideColumn(
+            header: "Bar",
+            field: "bar",
+            renderer: (FooBar rowData) => Text(rowData.bar),
+        ),
+    ],
+)
 ```
 
 ## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.

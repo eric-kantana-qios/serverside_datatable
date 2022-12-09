@@ -2,12 +2,12 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-class CommonToggleButtons<T> extends StatefulWidget {
+class ServerSideToggleButtons<T> extends StatefulWidget {
   final List<T> _items;
   final Function(T selectedItem)? _onItemSelected;
   final int _rowCount;
   final T? _defaultSelected;
-  const CommonToggleButtons({
+  const ServerSideToggleButtons({
     Key? key,
     required List<T> items,
     Function(T selectedItem)? onItemSelected,
@@ -20,10 +20,10 @@ class CommonToggleButtons<T> extends StatefulWidget {
         super(key: key);
 
   @override
-  State<CommonToggleButtons<T>> createState() => _CommonToggleButtonsState();
+  State<ServerSideToggleButtons<T>> createState() => _ServerSideToggleButtonsState();
 }
 
-class _CommonToggleButtonsState<T> extends State<CommonToggleButtons<T>> {
+class _ServerSideToggleButtonsState<T> extends State<ServerSideToggleButtons<T>> {
   late Map<T, bool> _selections;
   late int columnCount;
 

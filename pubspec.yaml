@@ -1,7 +1,7 @@
 name: serverside_datatable
-description: A new Flutter package project.
+description: Simplified generic serverside datatable by only providing the fetch implementation.
 version: 0.0.1
-homepage:
+homepage: https://github.com/eric-kantana-qios/serverside_datatable.git
 
 environment:
   sdk: '>=2.18.2 <3.0.0'

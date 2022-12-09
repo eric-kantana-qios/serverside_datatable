@@ -31,7 +31,7 @@ class _ServerSideFilterChipsState<T> extends State<ServerSideFilterChips<T>> {
                   onDeleted: () {
                     source.removeFilter(filter);
                   },
-                  label: Text("${filter.column.header} ${filter.matchMode.string} ${filter.value ?? filter.intValue}"),
+                  label: Text("${filter.field} ${filter.matchMode.string} ${filter.value}"),
                 ),
               ),
             ),

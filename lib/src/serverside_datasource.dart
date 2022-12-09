@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'serverside_column.dart';
-import 'serverside_filter_menu.dart';
+import 'serverside_filter.dart';
 import 'serverside_repository.dart';
 
 class ServerSideDataSource<T> extends DataTableSource {
   final List<ServerSideColumn<T>> _columns;
   int _offset;
   int _rowsPerPage;
-  final List<ServerSideFilter> _filters = [];
+  final List<ServerSideAppliedFilter> _filters = [];
   final ServerSideRepository<T> _repository;
 
   void onRepositoryParamUpdated() {
@@ -22,14 +22,14 @@ class ServerSideDataSource<T> extends DataTableSource {
     }
   }
 
-  List<ServerSideFilter> get filters => _filters;
+  List<ServerSideAppliedFilter> get filters => _filters;
 
-  void addFilter(ServerSideFilter filter) {
+  void addFilter(ServerSideAppliedFilter filter) {
     _filters.add(filter);
     _fetch();
   }
 
-  void removeFilter(ServerSideFilter filter) {
+  void removeFilter(ServerSideAppliedFilter filter) {
     _filters.removeWhere((element) => element == filter);
     _fetch();
   }
@@ -58,9 +58,10 @@ class ServerSideDataSource<T> extends DataTableSource {
   }
 
   void _fetch() async {
+    final lastFetchedItem = _data.isNotEmpty ? _data.last : null;
     _data.clear();
     notifyListeners();
-    _repository.fetchData(_offset, _rowsPerPage).then((response) {
+    _repository.fetchData(filters, lastFetchedItem, _offset, _rowsPerPage).then((response) {
       _data.addAll(response.data);
       _totalRecords = response.totalRecords;
       notifyListeners();

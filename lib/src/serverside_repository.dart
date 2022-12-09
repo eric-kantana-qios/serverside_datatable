@@ -1,6 +1,8 @@
+import 'serverside_filter.dart';
+
 abstract class ServerSideRepository<T> {
   List<void Function()> listeners = [];
-  Future<ServerSideResponse<T>> fetchData(int offset, int limit);
+  Future<ServerSideResponse<T>> fetchData(List<ServerSideAppliedFilter> appliedFilters, T? lastFetchedItem, int offset, int limit);
 
   void addListener(void Function() listener) {
     listeners.add(listener);
