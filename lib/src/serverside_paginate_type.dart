@@ -1,0 +1,1 @@
+enum ServerSidePaginateType { next, previous }

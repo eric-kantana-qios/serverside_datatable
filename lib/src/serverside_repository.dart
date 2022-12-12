@@ -1,10 +1,15 @@
-import 'server_side_paginate_type.dart';
+import 'package:serverside_datatable/src/serverside_metadata.dart';
+
 import 'serverside_filter.dart';
 
 abstract class ServerSideRepository<T> {
   List<void Function()> listeners = [];
   Future<ServerSideResponse<T>> fetchData(
-      List<ServerSideAppliedFilter> appliedFilters, T? lastFetchedItem, PaginateType paginateType, int offset, int limit);
+    List<ServerSideAppliedFilter> appliedFilters,
+    ServerSideMetadata<T> metadata,
+    int offset,
+    int limit,
+  );
 
   void addListener(void Function() listener) {
     listeners.add(listener);

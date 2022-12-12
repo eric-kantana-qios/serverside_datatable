@@ -29,3 +29,19 @@ Fix issue on zero division
 ## 0.0.8
 
 Adjust filter layout
+
+## 0.0.9
+
+Add pagination type
+
+## 0.0.10
+
+Adjust fetch parameter to ServerSideMetadata
+
+## 0.0.11
+
+Add generic type on repository metadata param
+
+## 0.0.12
+
+Fix lastFetchedItems issue by creating separate list instance
