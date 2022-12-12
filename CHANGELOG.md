@@ -45,3 +45,7 @@ Add generic type on repository metadata param
 ## 0.0.12
 
 Fix lastFetchedItems issue by creating separate list instance
+
+## 0.0.13
+
+Remove loading indicator from datatable

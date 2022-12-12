@@ -80,7 +80,7 @@ class ServerSideDataSource<T> extends DataTableSource {
   @override
   DataRow? getRow(int index) {
     final rowIndex = index % _rowsPerPage;
-    if (rowIndex > _data.length - 1) return null;
+    if (rowIndex > _data.length - 1) return DataRow(cells: _columns.map((column) => const DataCell(Text(""))).toList());
     return DataRow(
       onSelectChanged: (value) {
         onRowClick?.call(_data[rowIndex]);
