@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'server_side_paginate_type.dart';
 import 'serverside_column.dart';
 import 'serverside_filter.dart';
 import 'serverside_repository.dart';
@@ -11,6 +12,7 @@ class ServerSideDataSource<T> extends DataTableSource {
   final List<ServerSideAppliedFilter> _filters = [];
   final ServerSideRepository<T> _repository;
   final Function(T rowData)? onRowClick;
+  PaginateType _paginateType = PaginateType.next;
 
   void onRepositoryParamUpdated() {
     _fetch();
@@ -18,6 +20,11 @@ class ServerSideDataSource<T> extends DataTableSource {
 
   set offset(offset) {
     if (_offset != offset) {
+      if (offset > _offset) {
+        _paginateType = PaginateType.next;
+      } else {
+        _paginateType = PaginateType.previous;
+      }
       _offset = offset;
       _fetch();
     }
@@ -62,7 +69,7 @@ class ServerSideDataSource<T> extends DataTableSource {
     final lastFetchedItem = _data.isNotEmpty ? _data.last : null;
     _data.clear();
     notifyListeners();
-    _repository.fetchData(filters, lastFetchedItem, _offset, _rowsPerPage).then((response) {
+    _repository.fetchData(filters, lastFetchedItem, _paginateType, _offset, _rowsPerPage).then((response) {
       _data.addAll(response.data);
       _totalRecords = response.totalRecords;
       notifyListeners();

@@ -1,0 +1,1 @@
+enum PaginateType { next, previous }

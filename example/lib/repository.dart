@@ -6,6 +6,7 @@ class Repository extends ServerSideRepository<FooBar> {
   Future<ServerSideResponse<FooBar>> fetchData(
     List<ServerSideAppliedFilter<DropdownItem>> appliedFilters,
     FooBar? lastFetchedItem,
+    PaginateType paginateType,
     int offset,
     int limit,
   ) async {
