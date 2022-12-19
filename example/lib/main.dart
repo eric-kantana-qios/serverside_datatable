@@ -39,14 +39,12 @@ class MyApp extends StatelessWidget {
             columns: [
               ServerSideColumn(
                 header: "Foo",
-                field: "foo",
                 renderer: (rowData) {
                   return Text(rowData.foo);
                 },
               ),
               ServerSideColumn(
                 header: "Bar",
-                field: "bar",
                 renderer: (rowData) {
                   return Text(rowData.bar);
                 },
