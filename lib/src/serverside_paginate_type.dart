@@ -1,1 +1,1 @@
-enum ServerSidePaginateType { next, previous }
+enum ServerSidePaginateType { first, next, previous, last }

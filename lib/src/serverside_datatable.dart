@@ -39,6 +39,7 @@ class ServerSideDataTable<T> extends StatefulWidget {
 
 class _ServerSideDataTableState<T> extends State<ServerSideDataTable<T>> {
   late ServerSideDataSource<T> _source;
+  final key = GlobalKey<PaginatedDataTableState>();
 
   @override
   void initState() {
@@ -50,6 +51,7 @@ class _ServerSideDataTableState<T> extends State<ServerSideDataTable<T>> {
   @override
   Widget build(BuildContext context) {
     return PaginatedDataTable(
+      key: key,
       showCheckboxColumn: false,
       header: Row(
         children: [
@@ -59,7 +61,13 @@ class _ServerSideDataTableState<T> extends State<ServerSideDataTable<T>> {
             flex: 1,
             child: ChangeNotifierProvider.value(
               value: _source,
-              child: ServerSideFilterChips<T>(),
+              child: ServerSideFilterChips<T>(
+                onFilterRemoved: () {
+                  setState(() {
+                    key.currentState?.pageTo(0);
+                  });
+                },
+              ),
             ),
           ),
         ],
@@ -69,7 +77,10 @@ class _ServerSideDataTableState<T> extends State<ServerSideDataTable<T>> {
           ServerSideFilterMenu(
             filters: widget._filters,
             onFilterApplied: (filterApplied) {
-              _source.addFilter(filterApplied);
+              setState(() {
+                key.currentState?.pageTo(0);
+                _source.addFilter(filterApplied);
+              });
             },
             columnFilterRow: widget._columnFilterRow,
           ),

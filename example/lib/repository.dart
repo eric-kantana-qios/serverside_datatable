@@ -11,16 +11,20 @@ class Repository extends ServerSideRepository<FooBar> {
     int offset,
     int limit,
   ) async {
-    final fooBars = [
-      FooBar("A", "B"),
-      FooBar("C", "D"),
-      FooBar("E", "F"),
-      FooBar("G", "H"),
-    ];
+    final fooBars = <FooBar>[];
+
+    for (var i = 0; i < 2001; i++) {
+      final chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".split("");
+      chars.shuffle();
+      final foo = chars.take(10).join();
+      chars.shuffle();
+      final bar = chars.take(10).join();
+      fooBars.add(FooBar(foo, bar));
+    }
+
     final totalRecords = fooBars.length;
-    if (offset + limit > totalRecords) limit = totalRecords;
     return ServerSideResponse(
-      offset > fooBars.length ? [] : fooBars.getRange(offset, limit).toList(),
+      offset > fooBars.length ? [] : fooBars.getRange(offset, min(offset + limit, totalRecords)).toList(),
       totalRecords,
     );
   }

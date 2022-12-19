@@ -5,7 +5,8 @@ import 'serverside_datasource.dart';
 import 'serverside_matchmode.dart';
 
 class ServerSideFilterChips<T> extends StatefulWidget {
-  const ServerSideFilterChips({Key? key}) : super(key: key);
+  final void Function()? onFilterRemoved;
+  const ServerSideFilterChips({Key? key, this.onFilterRemoved}) : super(key: key);
 
   @override
   State<ServerSideFilterChips<T>> createState() => _ServerSideFilterChipsState<T>();
@@ -29,6 +30,7 @@ class _ServerSideFilterChipsState<T> extends State<ServerSideFilterChips<T>> {
                 child: Chip(
                   deleteIcon: const Icon(Icons.close),
                   onDeleted: () {
+                    widget.onFilterRemoved?.call();
                     source.removeFilter(filter);
                   },
                   label: Text("${filter.field} ${filter.matchMode.string} ${filter.value ?? filter.dropDownValue?.dropdownName}"),

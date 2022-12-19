@@ -20,14 +20,18 @@ class ServerSideDataSource<T> extends DataTableSource {
     _fetch();
   }
 
-  set offset(offset) {
-    if (_offset != offset) {
-      if (offset > _offset) {
+  set offset(value) {
+    if (_offset != value) {
+      if (value == 0) {
+        _paginateType = ServerSidePaginateType.first;
+      } else if (value + _rowsPerPage >= _totalRecords) {
+        _paginateType = ServerSidePaginateType.last;
+      } else if (value > _offset) {
         _paginateType = ServerSidePaginateType.next;
       } else {
         _paginateType = ServerSidePaginateType.previous;
       }
-      _offset = offset;
+      _offset = value;
       _fetch();
     }
   }

@@ -53,3 +53,7 @@ Remove loading indicator from datatable
 ## 0.0.14
 
 Add error handler on fetch error
+
+## 0.0.15
+
+Reset page to 0 on filter changes
