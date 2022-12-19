@@ -49,3 +49,7 @@ Fix lastFetchedItems issue by creating separate list instance
 ## 0.0.13
 
 Remove loading indicator from datatable
+
+## 0.0.14
+
+Add error handler on fetch error

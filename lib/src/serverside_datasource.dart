@@ -14,6 +14,7 @@ class ServerSideDataSource<T> extends DataTableSource {
   final ServerSideRepository<T> _repository;
   final Function(T rowData)? onRowClick;
   ServerSidePaginateType _paginateType = ServerSidePaginateType.next;
+  final void Function(dynamic error)? onFetchError;
 
   void onRepositoryParamUpdated() {
     _fetch();
@@ -55,7 +56,7 @@ class ServerSideDataSource<T> extends DataTableSource {
   final List<T> _data = [];
   int _totalRecords = 0;
 
-  ServerSideDataSource(this._repository, this._columns, this._offset, this._rowsPerPage, this.onRowClick) {
+  ServerSideDataSource(this._repository, this._columns, this._offset, this._rowsPerPage, this.onRowClick, this.onFetchError) {
     _repository.addListener(onRepositoryParamUpdated);
     _fetch();
   }
@@ -74,6 +75,8 @@ class ServerSideDataSource<T> extends DataTableSource {
       _data.addAll(response.data);
       _totalRecords = response.totalRecords;
       notifyListeners();
+    }).catchError((error) {
+      onFetchError?.call(error);
     });
   }
 
