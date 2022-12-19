@@ -57,3 +57,7 @@ Add error handler on fetch error
 ## 0.0.15
 
 Reset page to 0 on filter changes
+
+## 0.0.16
+
+Remove unnecessary params
