@@ -65,3 +65,7 @@ Remove unnecessary params
 ## 0.0.17
 
 Set default pagination type to first instead of next
+
+## 0.0.18
+
+Dispose datatable source on datatable dispose

@@ -109,4 +109,10 @@ class _ServerSideDataTableState<T> extends State<ServerSideDataTable<T>> {
       showFirstLastButtons: true,
     );
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _source.dispose();
+  }
 }
