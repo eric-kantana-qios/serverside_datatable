@@ -61,3 +61,7 @@ Reset page to 0 on filter changes
 ## 0.0.16
 
 Remove unnecessary params
+
+## 0.0.17
+
+Set default pagination type to first instead of next

@@ -13,7 +13,7 @@ class ServerSideDataSource<T> extends DataTableSource {
   final List<ServerSideAppliedFilter> _filters = [];
   final ServerSideRepository<T> _repository;
   final Function(T rowData)? onRowClick;
-  ServerSidePaginateType _paginateType = ServerSidePaginateType.next;
+  ServerSidePaginateType _paginateType = ServerSidePaginateType.first;
   final void Function(dynamic error)? onFetchError;
 
   void onRepositoryParamUpdated() {
